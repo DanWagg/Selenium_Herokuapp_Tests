@@ -28,10 +28,11 @@ public class PositiveTests {
 
 //      enter username
         WebElement username = driver.findElement(By.id("username"));
+        username.sendKeys("tomsmith");
 
 //      enter password
         WebElement password = driver.findElement(By.name("password"));
-
+        username.sendKeys("SuperSecretPassword!");
 //      click login button
         WebElement logInButton = driver.findElement(By.tagName("button"));
 
@@ -41,6 +42,7 @@ public class PositiveTests {
 
 //      logout button is visible
         WebElement logOutButton = driver.findElement(By.xpath("//a[@class='button secondary radius']"));
+        logOutButton.click();
 
 //      succesful login message
         WebElement successMessage = driver.findElement(By.cssSelector("div#flash"));
