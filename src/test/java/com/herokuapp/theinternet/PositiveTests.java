@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class PositiveTests {
@@ -32,22 +33,36 @@ public class PositiveTests {
 
 //      enter password
         WebElement password = driver.findElement(By.name("password"));
-        username.sendKeys("SuperSecretPassword!");
+        password.sendKeys("SuperSecretPassword!");
+
 //      click login button
         WebElement logInButton = driver.findElement(By.tagName("button"));
+        logInButton.click();
 
 //      verifications:
 
 //      new url
+        String expectedUrl = "http://the-internet.herokuapp.com/secure";
+        String actualUrl = driver.getCurrentUrl();
+        Assert.assertEquals(actualUrl,expectedUrl,"actual url is not the same as expected");
 
 //      logout button is visible
         WebElement logOutButton = driver.findElement(By.xpath("//a[@class='button secondary radius']"));
-        logOutButton.click();
+        Assert.assertTrue(logOutButton.isDisplayed(),"Log out button is not visible");
 
-//      succesful login message
+        logOutButton.click();
+        System.out.println("Log out");
+
+
+//      succesful login message - green popup
         WebElement successMessage = driver.findElement(By.cssSelector("div#flash"));
+        String expectedMessage =  "You logged out of the secure area!";
+        String actualMessage = successMessage.getText();
+        //assertEquals or assertTrue
+        //Assert.assertEquals(expectedMessage,actualMessage,"actual message is not the same as expected");
 
 //      close browser
         driver.quit();
+        System.out.println("Page is closed");
     }
 }
