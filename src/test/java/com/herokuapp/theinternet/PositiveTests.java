@@ -19,7 +19,7 @@ public class PositiveTests {
         System.setProperty("webdriver.chrome.driver","src/main/resources/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
 
-        //      maximize browser window
+        //maximize browser window
         driver.manage().window().maximize();
 
 //      open test page
@@ -56,10 +56,11 @@ public class PositiveTests {
 
 //      succesful login message - green popup
         WebElement successMessage = driver.findElement(By.cssSelector("div#flash"));
-        String expectedMessage =  "You logged out of the secure area!";
+        String expectedMessage =  "You logged out of the secure area!\n" + "×";
         String actualMessage = successMessage.getText();
-        //assertEquals or assertTrue
-        //Assert.assertEquals(expectedMessage,actualMessage,"actual message is not the same as expected");
+        Assert.assertTrue(actualMessage.contains(expectedMessage),
+                "Actual message does not contain expected message.\nActual message: " +  actualMessage
+        + "\nExpected message :" + expectedMessage);
 
 //      close browser
         driver.quit();
